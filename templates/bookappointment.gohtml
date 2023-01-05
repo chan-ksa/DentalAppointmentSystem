@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment (Customer)</title>
+</head>
+<body>
+    <h1>Book a new appointment</h1>
+
+    <form action="/bookappointment" method="post">       
+        <label for="Date">Date: </label>
+        <select name="newAppointmentId">    
+        {{range .}} 
+            {{if eq .Name ""}}      
+            <option value="{{.AppId}}" name="newAppointmentId">{{.Date}} {{.StartTime}} {{.EndTime}}</option>
+            {{end}}
+        {{end}}
+        </select>
+        <br><br>    
+        <input type="submit" value="Confirm">
+    </form>
+    <br><br>
+    <button><a href="/">Return to Main Page</a></button>
+    
+</body>
+</html>

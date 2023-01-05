@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page (Customer)</title>
+</head>
+<body>
+    {{$username := .User.Username}}
+
+    <div>
+        <h1>WELCOME {{$username}}</h1>
+        
+        <h3><a href="/profile">Edit your profile</a></h3>
+    </div>
+
+    <h3><a href="/bookappointment">Book An Appointment</a></h3>
+
+    <h2>Your booked Appointments</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+        
+        {{range .App}}
+            {{if eq $username .Name}}
+                <tr>                        
+                    <td>{{.Date}}</td>
+                    <td>{{.StartTime}}</td>
+                    <td>{{.EndTime}}</td>        
+                    <form name=form action="/editappointment" method="post">
+                        <td><input type ="submit" value="Edit"></td>                    
+                        <td><input type ="submit" value="Delete" onclick="form.action='/deleteappointment'"></td> 
+                        <input type="hidden" value="{{.AppId}}" name="AId">
+                    </form>
+                    <br>        
+                </tr>   
+            {{end}}
+        {{end}}
+    </table>
+
+    <br><br><br>
+    <button><a href="/logout">Logout</a></button>
+</body>
+</html>

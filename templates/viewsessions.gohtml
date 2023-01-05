@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Sessions (Admin)</title>
+</head>
+<body>
+    <h2>All Sessions</h2>
+    <div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Session ID</th> 
+            </tr>    
+            {{range .}}
+                <tr>                        
+                    <td>{{.Username}}</td>
+                    <td>{{.SessionID}}</td>
+
+                    <form name=form action="/deletesession" method="post">                         
+                        <td><input type ="submit" value="Delete" ></td> 
+                        <input type="hidden" value="{{.SessionID}}" name="sessionID">
+                        <input type="hidden" value="{{.Username}}" name="username">
+                    </form>
+                    <br>        
+                </tr>   
+            {{end}}
+        </table>
+    </div>
+    <button><a href="/">Return to Main Page</a></button>
+</body>
+</html>

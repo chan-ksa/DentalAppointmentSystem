@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Appointments (Admin)</title>
+
+</head>
+<body>
+    <h2>All Booked Appointments</h2>
+    <div>
+    <table>
+    <tr>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Booked by</th>        
+    </tr>    
+    {{range .}}
+        {{if ne .Name ""}}
+            <tr>                        
+                <td>{{.Date}}</td>
+                <td>{{.StartTime}}</td>
+                <td>{{.EndTime}}</td>
+                <td>{{.Name}}</td>
+
+                <form name=form action="/edituserappointment" method="post">
+                    <td><input type ="submit" value="Edit"></td>                    
+                    <td><input type ="submit" value="Delete" onclick="form.action='/deleteuserappointment'"></td> 
+                    <input type="hidden" value="{{.AppId}}" name="AId">
+                </form>
+                <br>        
+            </tr>   
+        {{end}}
+    {{end}}
+</table>
+</div>
+    <button><a href="/">Return to main page</a></button>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Appointment (Admin)</title>
+</head>
+<body>
+    <h1>Current Appointment</h1>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <br>
+        </tr>            
+        <tr>                
+            <td>{{.App.Name}}</td>           
+            <td>{{.App.Date}}</td>
+            <td>{{.App.StartTime}}</td>
+            <td>{{.App.EndTime}}</td>                
+            <br>        
+        </tr>           
+    </table>
+    <h1>Change appointment to: </h1>
+    <form action="/edituserappointmentdone" method="post">       
+        <label for="Date">Date: </label>
+        <select name="newAppointment">    
+        {{range .AllApps}} 
+            {{if eq .Name ""}}      
+                <option value="{{.AppId}}" name="newAppointment">{{.Date}} {{.StartTime}} {{.EndTime}}</option>
+            {{end}}
+        {{end}}
+        
+        </select>
+        <br><br>
+        <input type="hidden" name="oldAppointment" value="{{.App.AppId}}">
+        <input type="hidden" name="user" value="{{.App.Name}}">
+        <input type="submit">
+    </form>
+    <br>
+    <button><a href="/">Return to Main Page</a></button>
+</body>
+</html>
